@@ -1,3 +1,6 @@
+//This is the main source file
+//It handles how the menu is displayed and how each function is called and interacts with each other.
+
 #include "project.c"
 #include "project.h"
 

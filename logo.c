@@ -1,3 +1,5 @@
+//This file was created to test the display of the logo
+
 #include <stdio.h>
 #define RED     "\x1b[31m"
 #define GREEN   "\x1b[32m"

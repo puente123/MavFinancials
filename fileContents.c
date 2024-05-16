@@ -1,3 +1,5 @@
+//This file was created as a test to print the contents of the file created by 1320project.c
+
 #include <stdio.h>
 
 struct UserAccount {

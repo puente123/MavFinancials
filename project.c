@@ -50,6 +50,7 @@ void getCurrentDate(char *print){
     strftime(print, 20, "%m-%d-%Y", tm_info);
 }
 
+//Prints the transactions for the current user
 void viewTransactions(FILE *file, char* username){
     struct UserAccount user;
 
@@ -65,6 +66,8 @@ void viewTransactions(FILE *file, char* username){
     }
 }
 
+
+//Creates a new user and saves their information to the file
 void registerUser(FILE* file) {
     struct UserAccount user;
     int userExists = 1;
@@ -133,6 +136,8 @@ void registerUser(FILE* file) {
 
 }
 
+
+//Verifies that the username and password match the one saved in the file
 int login(FILE* file, char* username, char* password) {
     struct UserAccount user;
 
@@ -152,6 +157,7 @@ int login(FILE* file, char* username, char* password) {
     return 0;
 }
 
+//Transfers money from one user to another user
 void transfer(FILE *file, char* username){
     struct UserAccount user, user2;
     double transferAmount;
@@ -225,17 +231,22 @@ void transfer(FILE *file, char* username){
     }
 }
 
+
+//This function prints the current users balance
 void viewBalance(FILE *file, char* username){
 
+    //Resets file pointer to beggining
     struct UserAccount u;
     fseek(file, 0, SEEK_SET);
 
+    //Finds the user with the same username, and prints their balance
     while(fread(&u, sizeof(struct UserAccount), 1, file) == 1)
         if(strcmp(u.username, username) == 0){
             printf(GREEN"Balance: $%.2f\n"RESET, u.balance);
         }    
 }
 
+//This function allows the user to view their account and make changes to information if necessary
 void viewAccount(FILE *file, char* username){
     
     int input;
@@ -247,7 +258,7 @@ void viewAccount(FILE *file, char* username){
     while(fread(&user, sizeof(struct UserAccount), 1, file) == 1){
         if(strcmp(user.username, username) == 0){
             
-            
+            //The print statements display the current informmation
             printf("\nName: %s\n", user.name);
             printf("Username: %s\n", user.username);
             printf("Password: %s\n", user.password);
@@ -259,6 +270,8 @@ void viewAccount(FILE *file, char* username){
             printf("1. Yes\n");
             printf("2. No\n");
             printf("Enter your choice: ");
+
+            //If the user selected to edit information a new display pops up to select options
             while(1){
                 scanf(" %d", &input);
                 if(input == 1){
@@ -330,6 +343,7 @@ void viewAccount(FILE *file, char* username){
     }
 }
 
+//If the user wishes to lock their card to avoid any transactions from occuring this function is called
 void lockcard(FILE *file, char* username){
     struct UserAccount user;
     fseek(file, 0, SEEK_SET);
@@ -354,12 +368,16 @@ void lockcard(FILE *file, char* username){
     }
 }
 
+
+//This function checks if the password is valid
+//It must be longer than 10 characters
+//1 upercase, 1 lowercase, 1 number, 1 symbol
 int isValidPassword(char *pass){
 
-    int up=0,low=0,num=0,sym=0,len=0;  
+    int upercase=0,lowercase=0,num=0,sym=0,length=0;  
     if (strlen(pass)>10)
     {
-        len=1;
+        length=1;
     }
     else
     {
@@ -367,13 +385,13 @@ int isValidPassword(char *pass){
     }
     for (int i=0; i<strlen(pass);i++)
     {
-        if((up==0) && isalpha(pass[i])!=0 && isupper(pass[i])!=0)
+        if((upercase==0) && isalpha(pass[i])!=0 && isupper(pass[i])!=0)
         {
-            up=1;
+            upercase=1;
         }
-        else if((low==0) && isalpha(pass[i])!=0 && islower(pass[i])!=0)
+        else if((lowercase==0) && isalpha(pass[i])!=0 && islower(pass[i])!=0)
         {
-            low=1;
+            lowercase=1;
         }
         else if((num==0) && isdigit(pass[i])!=0)
         {
@@ -385,11 +403,11 @@ int isValidPassword(char *pass){
         }
         
     }
-    if ((up==0))
+    if ((upercase==0))
     {
         printf(RED"Password must contain atleast one uppercase character.\n"RESET);
     }    
-    if((low==0))
+    if((lowercase==0))
     {
         printf(RED"Password must contain atleast one lowercase character.\n"RESET);
     }
@@ -402,7 +420,7 @@ int isValidPassword(char *pass){
         printf(RED"Password must contain atleast one symbol.\n"RESET);
     }
 
-    if(up==1 && low==1 && num==1 && sym==1 && len==1){
+    if(upercase==1 && lowercase==1 && num==1 && sym==1 && lenght==1){
         return 1;
     }
     else{
