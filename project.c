@@ -13,7 +13,7 @@ void removeNewline(char* str) {
     }
 }
 
-//Returns 1 if Username exists
+// Returns 1 if Username exists
 int checkUsername(FILE *file, char *username){
     struct UserAccount user;
     fseek(file, 0, SEEK_SET);
@@ -22,10 +22,8 @@ int checkUsername(FILE *file, char *username){
         if(strcmp(user.username, username) == 0){
             return 1;
         }
-        else{
-            return 0;
-        }
     }
+    return 0;
 }
 
 void printLogo(){
@@ -383,7 +381,7 @@ int isValidPassword(char *pass){
     {
         printf(RED"Password too short.\n"RESET);
     }
-    for (int i=0; i<strlen(pass);i++)
+    for (size_t i=0; i<strlen(pass);i++)
     {
         if((upercase==0) && isalpha(pass[i])!=0 && isupper(pass[i])!=0)
         {

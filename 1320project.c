@@ -15,7 +15,7 @@ int main() {
     }
 
     int choice, exit = 0;
-    struct UserAccount mainUser;
+    //struct UserAccount mainUser;
     
     char username[50], password[50];
 
