@@ -420,7 +420,7 @@ int isValidPassword(char *pass){
         printf(RED"Password must contain atleast one symbol.\n"RESET);
     }
 
-    if(upercase==1 && lowercase==1 && num==1 && sym==1 && lenght==1){
+    if(upercase==1 && lowercase==1 && num==1 && sym==1 && length==1){
         return 1;
     }
     else{
