@@ -29,3 +29,5 @@
 # VS Code specific files
 .vscode/
 .vscode/*
+
+*.txt
